@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE-edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Buscar Cliente</h1>
+    <form action="/buscar" method="get">
+        <label>CPF:</label>
+        <input type="text" name="cpf"><br>
+        <button type="submit">Buscar</button>
+    </form>
+
+    <!-- Exibir informações do cliente, se encontrado -->
+    <div th:if="${cliente}">
+        <h2>Informações do Cliente</h2>
+        <p>Nome: <span th:text="${cliente.nome}"></span></p>
+        <p>CPF: <span th:text="${cliente.cpf}"></span></p>
+        <p>Telefone: <span th:text="${cliente.telefone}"></span></p>
+        <p>Email: <span th:text="${cliente.email}"></span></p>
+    </div>
+
+</body>
+</html>
