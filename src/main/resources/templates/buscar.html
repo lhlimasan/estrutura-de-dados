@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+
+    </style>
+    <title>Sistema Supermercado</title>
 </head>
 <body>
     <h1>Buscar Cliente</h1>
@@ -13,14 +16,27 @@
         <input type="text" name="cpf"><br>
         <button type="submit">Buscar</button>
     </form>
+    <form action="cadastrar">
+        <button type="submit">Cadastrar outro cliente</button>
+    </form>
 
     <!-- Exibir informações do cliente, se encontrado -->
     <div th:if="${cliente}">
-        <h2>Informações do Cliente</h2>
-        <p>Nome: <span th:text="${cliente.nome}"></span></p>
-        <p>CPF: <span th:text="${cliente.cpf}"></span></p>
-        <p>Telefone: <span th:text="${cliente.telefone}"></span></p>
-        <p>Email: <span th:text="${cliente.email}"></span></p>
+        <table border="1">
+            <h2>Informações do Cliente</h2>
+            <tr>
+                <td>Nome</td>
+                <td>CPF</td>
+                <td>Celular</td>
+                <td>Email</td>
+            </tr>
+            <tr>
+                <td th:text="${cliente.nome}"></td>
+                <td th:text="${cliente.cpf}"></td>
+                <td th:text="${cliente.telefone}"></td>
+                <td th:text="${cliente.email}"></td>
+            </tr>
+        </table>
     </div>
 
 </body>

@@ -4,20 +4,103 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+            color: #2d363e;
+            background: #eeeeee;
+        }
+        .top-nav{
+            width: 100%;
+            height: 2.5em;
+            background-color: #9dadba;
+            margin-top: 0;
+        }
+
+        .form > *{
+            font-weight: lighter;
+            margin-left: 50px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input{
+            height: 25px;
+            max-width: 300px;
+            flex-grow: 0;
+            border: 2px solid #ced4d9;
+            border-radius: 5px;
+            outline: none;
+        }
+
+        button{
+            width: 90px;
+            height: 35px;
+            flex-grow: 0;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 5px;
+            flex-direction: row;
+        }
+        .limpar{
+            color:#5e4f0e;
+            background: #f8c325;
+            border: none;
+            margin-left: 200px;
+        }
+        .limpar:hover{
+            background: #e7b214;
+        }
+        .enviar{
+            color: #e0f1ef;
+            background: #207868;
+            border: none;
+            position: relative;
+            left: 300px;
+            bottom: -35px;
+        }
+        .enviar:hover{
+            background: #1f6757;
+        }
+        .buscar{
+            background: #ADD8E6;
+            border:none;
+            position: relative;
+            left: 400px;
+            bottom: 35px;
+        }
+
+
+
+    </style>
+    <title>Sistema Supermercado</title>
 </head>
 <body>
-    <h1>Cadastrar Cliente</h1>
-    <form action="/cadastrar" method="post">
-        <label>Nome:</label>
-        <input type="text" name="nome"><br>
-        <label>CPF:</label>
-        <input type="text" name="cpf"><br>
-        <label>Telefone:</label>
-        <input type="text" name="telefone"><br>
-        <label>Email:</label>
-        <input type="text" name="email"><br>
-        <button type="submit">Cadastrar</button>
-    </form>
+    <header class="page-search-header">
+        <nav class="top-nav"></nav>
+    </header>
+    <container class="form">
+        <h2>Sistema de Registro de Clientes</h2>
+        <h3>Cadastrar Cliente</h3>
+        <form action="/cadastrar" method="post">
+            <label>Nome</label>
+            <input type="text" name="nome" placeholder="Digite seu nome..."><br>
+            <label>CPF</label>
+            <input type="text" name="cpf" placeholder="Digite seu cpf..."><br>
+            <label>Telefone</label>
+            <input type="text" name="telefone" placeholder="Digite seu telefone..."><br>
+            <label>Email</label>
+            <input type="text" name="email" placeholder="Digite seu email..."><br>
+            <button type="submit" class="enviar">Salvar</button>
+        </form>
+        <form action="limpar" method="post">
+            <button type="submit" class="limpar">Limpar</button>
+        </form>
+        <form action="buscar">
+            <button type="submit" class="buscar">Buscar Clientes</button>
+        </form>
+    </container>
 </body>
 </html>
