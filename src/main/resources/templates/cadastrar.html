@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
@@ -65,13 +65,16 @@
             background: #1f6757;
         }
         .buscar{
+            color:#5e4f0e;
             background: #ADD8E6;
             border:none;
             position: relative;
             left: 400px;
             bottom: 35px;
         }
-
+        .buscar:hover{
+            background: #9CC7D5;
+        }
 
 
     </style>
@@ -88,19 +91,22 @@
             <label>Nome</label>
             <input type="text" name="nome" placeholder="Digite seu nome..."><br>
             <label>CPF</label>
-            <input type="text" name="cpf" placeholder="Digite seu cpf..."><br>
+            <input type="number" name="cpf" placeholder="Digite seu cpf..."><br>
             <label>Telefone</label>
-            <input type="text" name="telefone" placeholder="Digite seu telefone..."><br>
+            <input type="number" name="telefone" placeholder="Digite seu telefone..."><br>
             <label>Email</label>
             <input type="text" name="email" placeholder="Digite seu email..."><br>
             <button type="submit" class="enviar">Salvar</button>
         </form>
         <form action="limpar" method="post">
+            <input type="hidden" name="rota" value="cadastro">
             <button type="submit" class="limpar">Limpar</button>
         </form>
         <form action="buscar">
             <button type="submit" class="buscar">Buscar Clientes</button>
         </form>
+        <h1 th:if="${campos}" th:text="${campos}" style="color: red"></h1>
+        <h1 th:if="${cpf}" th:text="${cpf}" style="color: red"></h1>
     </container>
 </body>
 </html>

@@ -5,39 +5,187 @@
     <meta http-equiv="X-UA-Compatible" content="IE-edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial;
+            color: #2d363e;
+            background: #eeeeee;
+        }
+        .top-nav{
+            width: 100%;
+            height: 2.5em;
+            background-color: #9dadba;
+            margin-top: 0;
+        }
+        .form > *{
+            font-weight: lighter;
+            margin-left: 50px;
+            display: flex;
+            flex-direction: column;
+        }
+        input{
+            height: 25px;
+            max-width: 300px;
+            flex-grow: 0;
+            border: 2px solid #ced4d9;
+            border-radius: 5px;
+            outline: none;
+        }
+        button{
+            width: 90px;
+            height: 35px;
+            flex-grow: 0;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 5px;
+            flex-direction: row;
+        }
+        .limpar{
+            color:#5e4f0e;
+            background: #f8c325;
+            border: none;
+            margin-left: 200px;
+        }
+        .limpar:hover{
+            background: #e7b214;
+        }
+        .enviar{
+            color: #e0f1ef;
+            background: #207868;
+            border: none;
+            position: relative;
+            left: 300px;
+            bottom: -35px;
+        }
+        .enviar:hover{
+            background: #1f6757;
+        }
+        .cadastrar{
+            color:#5e4f0e;
+            background: #ADD8E6;
+            border:none;
+            position: relative;
+            left: 400px;
+            bottom: 35px;
+        }
+        .cadastrar:hover{
+            background: #9CC7D5;
+        }
+        img{
+            position: relative;
+            top: 2px;
+            margin-right: 5px;
+        }
 
+        .tabela{
+            border: 2px solid #ced4d9;
+            width: 97%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 2px solid #ced4d9;
+            padding: 8px;
+            color: #273843;
+        }
+        thead {
+            font-weight: bolder;
+            background-color: #acb2b7;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #dfe5ea;
+        }
     </style>
     <title>Sistema Supermercado</title>
 </head>
 <body>
-    <h1>Buscar Cliente</h1>
-    <form action="/buscar" method="get">
-        <label>CPF:</label>
-        <input type="text" name="cpf"><br>
-        <button type="submit">Buscar</button>
-    </form>
-    <form action="cadastrar">
-        <button type="submit">Cadastrar outro cliente</button>
-    </form>
+    <header class="page-search-header">
+        <nav class="top-nav"></nav>
+    </header>
+    <container class="form">
+        <h1>Buscar Cliente</h1>
+        <form action="/buscar" method="get">
+            <label>CPF</label>
+            <input type="text" name="cpf" maxlength="11"><br>
+            <button type="submit" class="enviar"><img src="https://i.ibb.co/7pnrHNc/lupa-2-1.png" alt="lupa-2-1" border="0" class="lupa">Buscar</button>
+        </form>
+        <form action="limpar" method="post">
+            <input type="hidden" name="rota" value="buscar">
+            <button type="submit" class="limpar"><img src="https://i.ibb.co/rpBhyFS/borracha.png" alt="borracha" border="0">Limpar</button>
+        </form>
+        <form action="cadastrar">
+            <button type="submit" class="cadastrar">Cadastrar cliente</button>
+        </form>
 
-    <!-- Exibir informações do cliente, se encontrado -->
-    <div th:if="${cliente}">
-        <table border="1">
-            <h2>Informações do Cliente</h2>
-            <tr>
-                <td>Nome</td>
-                <td>CPF</td>
-                <td>Celular</td>
-                <td>Email</td>
-            </tr>
-            <tr>
-                <td th:text="${cliente.nome}"></td>
-                <td th:text="${cliente.cpf}"></td>
-                <td th:text="${cliente.telefone}"></td>
-                <td th:text="${cliente.email}"></td>
-            </tr>
-        </table>
-    </div>
+        <!-- Exibir informações do cliente, se encontrado -->
+        <div th:if="${cliente}">
+            <table class="tabela">
+                <h2>Lista de Contatos</h2>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Celular</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td th:text="${cliente.nome}"></td>
+                        <td th:text="${cliente.cpf}"></td>
+                        <td th:text="${cliente.telefone}"></td>
+                        <td th:text="${cliente.email}"></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
 
+        <div th:unless="${cliente != null or erro == null}">
+            <h2 th:text="${erro}" style="color: red"></h2>
+        </div>
+
+        <div th:unless="${cliente}" th:if="${clienteList}">
+            <table class="tabela">
+                <h2>Lista de Contatos</h2>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Celular</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cliente : ${clienteList}">
+                    <td th:text="${cliente.nome}"></td>
+                    <td th:text="${cliente.cpf}"></td>
+                    <td th:text="${cliente.telefone}"></td>
+                    <td th:text="${cliente.email}"></td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        <div th:unless="${cliente == null or clienteList == null}">
+            <table class="tabela">
+                <h2>Lista de Contatos</h2>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Celular</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </container>
 </body>
 </html>
