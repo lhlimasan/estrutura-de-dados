@@ -20,6 +20,11 @@ import java.util.Map;
 public class ClienteController {
     private Map<String, Cliente> clientes = new HashMap<>();
 
+    @GetMapping("/")
+    public String redirectCadastro(){
+        return "redirect:/cadastrar";
+    }
+
     @PostMapping("/cadastrar")
     public String cadastrarCliente(@ModelAttribute Cliente cliente, RedirectAttributes redirectAttributes) {
         if(verificarDados(cliente).contains("campos")){
