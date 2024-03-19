@@ -11,7 +11,3 @@
   Matrícula: 2317163
 - Wescley Silva de Castro \
   Matrícula: 2319735
-***
-### Como Rodar o projeto
-
-Abrir o projeto em uma IDE que tenha o jdk
